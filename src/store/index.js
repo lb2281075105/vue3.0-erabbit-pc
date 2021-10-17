@@ -4,7 +4,7 @@ export default createStore({
   state: {
   },
   getters: {
-
+    // vuex的计算属性
   },
   mutations: {
   },
