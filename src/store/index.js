@@ -1,5 +1,5 @@
 import { createStore } from 'vuex'
-import cart from '@/modules/cart'
+import cart from '@/store/modules/cart'
 import category from '@/store/modules/category'
 import user from '@/store/modules/user'
 import createPersistedstate from 'vuex-persistedstate'

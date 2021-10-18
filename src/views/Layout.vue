@@ -1,22 +1,25 @@
 <template>
   <!--顶部通栏-->
-    <na></na>
+  <AppTopnav />
+
   <!-- 头部组件 -->
     <header></header>
   <!--  内部容器-->
-    <div class="main">
+    <div class="container" style="background-color: red">
+    内容容器
       <RouterView />
     </div>
   <!--  底部组件-->
-    <footer></footer>
+    <footer>内容容器</footer>
 </template>
 
 <script>
+import AppTopnav from '@/components/app-topnav'
 
 export default {
   name: 'Layout',
-  setup () {
-
+  components: {
+    AppTopnav
   }
 }
 </script>
