@@ -2,10 +2,15 @@
   <nav class="app-topnav">
     <div class="container">
       <ul>
-        <li><a href="javascript:;"><i class="iconfont icon-user"></i>周杰伦</a></li>
-        <li><a href="javascript:;">退出登录</a></li>
-        <li><a href="javascript:;">请先登录</a></li>
-        <li><a href="javascript:;">免费注册</a></li>
+        <!-- template 不会生成标签-->
+        <template v-if="profile.token">
+          <li><a href="javascript:;"><i class="iconfont icon-user"></i>{{profile.account}}</a></li>
+          <li><a href="javascript:;">退出登录</a></li>
+        </template>
+        <template v-else>
+          <li><a href="javascript:;">请先登录</a></li>
+          <li><a href="javascript:;">免费注册</a></li>
+        </template>
         <li><a href="javascript:;">我的订单</a></li>
         <li><a href="javascript:;">会员中心</a></li>
         <li><a href="javascript:;">帮助中心</a></li>
@@ -17,8 +22,20 @@
 </template>
 
 <script>
+import { useStore } from 'vuex'
+import { computed } from 'vue'
 export default {
-  name: 'AppTopnav'
+  name: 'AppTopnav',
+  setup () {
+    const store = useStore()
+    // 使用vuex中的state需要设置计算属性,计算属性响应式：或者在template中直接store.state.user.profile.token
+    const profile = computed(() => {
+      return store.state.user.profile
+    })
+    return {
+      profile
+    }
+  }
 }
 </script>
 
