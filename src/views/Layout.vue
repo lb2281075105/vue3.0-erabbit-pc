@@ -1,31 +1,33 @@
 <template>
   <!--顶部通栏-->
-  <AppTopnav />
+  <AppTopnav/>
 
   <!-- 头部组件 -->
-  <AppHeader />
+  <AppHeader/>
   <!--  内部容器-->
-    <div class="container" style="background-color: red">
+  <div class="app-body">
     内容容器
-      <RouterView />
-    </div>
+    <RouterView/>
+  </div>
   <!--  底部组件-->
-    <footer>内容容器</footer>
-  <button @click="login">登录</button>
-  <button @click="logout">退出登录</button>
+  <AppFooter/>
+
 </template>
 
 <script>
 import AppTopnav from '@/components/app-topnav'
 import AppHeader from '@/components/app-header'
-import { useStore } from 'vuex'
+import AppFooter from '@/components/app-footer'
+import {useStore} from 'vuex'
+
 export default {
   name: 'Layout',
   components: {
     AppTopnav,
-    AppHeader
+    AppHeader,
+    AppFooter
   },
-  setup () {
+  setup() {
     const store = useStore()
     const profile = {
       id: '',
@@ -40,7 +42,7 @@ export default {
       store.commit('user/setUser', profile)
     }
     const logout = () => {
-      store.commit('user/setUser',{
+      store.commit('user/setUser', {
         id: '',
         avatar: '',
         nickname: '',
@@ -58,5 +60,7 @@ export default {
 </script>
 
 <style scoped>
-
+.app-body {
+  min-height: 600px;
+}
 </style>
