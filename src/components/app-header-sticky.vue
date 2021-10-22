@@ -1,6 +1,6 @@
 <template>
   <div class="app-header-sticky" :class="{show:y >= 78}">
-    <div class="container" >
+    <div class="container" v-show="y>=78">
       <RouterLink class="logo" to="/"/>
       <AppHeaderNav/>
       <div class="right">
@@ -13,19 +13,22 @@
 
 <script>
 import AppHeaderNav from './app-header-nav'
-import {onMounted, ref} from "vue";
+// import {onMounted, ref} from "vue";
+import {useWindowScroll} from '@vueuse/core'
 
 export default {
   name: 'AppHeaderSticky',
   components: {AppHeaderNav},
   setup() {
-    const y = ref(0)
-    onMounted(() => {
-      window.onscroll = () => {
-        const scrollTop = document.documentElement.scrollTop
-        y.value = scrollTop
-      }
-    })
+    // const y = ref(0)
+    // onMounted(() => {
+    //   window.onscroll = () => {
+    //     const scrollTop = document.documentElement.scrollTop
+    //     y.value = scrollTop
+    //   }
+    // })
+    const {y} = useWindowScroll()
+
     return {y}
   }
 }
@@ -42,12 +45,12 @@ export default {
   background-color: #fff;
   border-bottom: 1px solid #e4e4e4;
   transform: translateY(-100%);
-  //opacity: 0;
+  opacity: 0;
 
   &.show {
     transition: all 0.3s linear;
     transform: none;
-    //opacity: 1;
+    opacity: 1;
   }
 
   .container {
