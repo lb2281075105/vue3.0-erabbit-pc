@@ -3,10 +3,11 @@
   <AppTopnav/>
 
   <!-- 头部组件 -->
+
   <AppHeader/>
+  <AppHeaderSticky />
   <!--  内部容器-->
   <div class="app-body">
-    内容容器
     <RouterView/>
   </div>
   <!--  底部组件-->
@@ -18,6 +19,7 @@
 import AppTopnav from '@/components/app-topnav'
 import AppHeader from '@/components/app-header'
 import AppFooter from '@/components/app-footer'
+import AppHeaderSticky from '@/components/app-header-sticky'
 import {useStore} from 'vuex'
 
 export default {
@@ -25,36 +27,13 @@ export default {
   components: {
     AppTopnav,
     AppHeader,
-    AppFooter
+    AppFooter,
+    AppHeaderSticky
   },
+  // 获取下分类数据
   setup() {
     const store = useStore()
-    const profile = {
-      id: '',
-      avatar: '',
-      nickname: '',
-      account: '123',
-      mobile: '',
-      token: 'dd'
-    }
-    const login = () => {
-      console.log('登录')
-      store.commit('user/setUser', profile)
-    }
-    const logout = () => {
-      store.commit('user/setUser', {
-        id: '',
-        avatar: '',
-        nickname: '',
-        account: '',
-        mobile: '',
-        token: ''
-      })
-    }
-    return {
-      login,
-      logout
-    }
+    store.dispatch('category/getList')
   }
 }
 </script>
